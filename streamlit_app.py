@@ -47,4 +47,4 @@ if time_to_insert:
 # New section to display fruityvice nutrition information
 import requests
 fruityvice_response = requests.get("https://www.fruityvice.com/api/fruit/watermelon")
-st.text(fruityvice_response)
+st.text(fruityvice_response.json())
