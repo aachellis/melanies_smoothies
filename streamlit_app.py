@@ -17,7 +17,8 @@ st.write("The name of your smoothie will be: ", name_on_order)
 cnx = st.connection("snowflake")
 session = cnx.session()
 my_dataframe = session.table("SMOOTHIES.PUBLIC.FRUIT_OPTIONS").select(col("FRUIT_NAME"))
-# st.dataframe(data=my_dataframe, use_container_width=True)
+st.dataframe(data=my_dataframe, use_container_width=True)
+st.stop()
 
 ingredients_list = st.multiselect(
     "Choose upto 5 ingredients:",
@@ -42,3 +43,8 @@ if time_to_insert:
     if ingredients_string:  
         session.sql(my_insert_stmt).collect()
         st.success(f"Your smoothie is ordered, {name_on_order}!", icon = "✅")
+
+# New section to display fruityvice nutrition information
+import requests
+fruityvice_response = requests.get("https://www.fruityvice.com/api/fruit/watermelon")
+st.text(fruityvice_reponse)
